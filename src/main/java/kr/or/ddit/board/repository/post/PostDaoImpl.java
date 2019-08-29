@@ -1,0 +1,50 @@
+package kr.or.ddit.board.repository.post;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import kr.or.ddit.board.model.Post;
+import kr.or.ddit.common.model.Page;
+
+public class PostDaoImpl implements IPostDao {
+
+	@Override
+	public int insertPost(SqlSession sqlSession, Post post) {
+		return sqlSession.insert("post.insertPost", post);
+	}
+
+	@Override
+	public int updatePost(SqlSession sqlSession, Post post) {
+		return  sqlSession.update("post.updatePost", post);
+	}
+
+	@Override
+	public int deletePost(SqlSession sqlSession, String postId) {
+		return  sqlSession.delete("post.deletePost", postId);
+	}
+
+	@Override
+	public Post getPost(SqlSession sqlSession, String postId) {
+		return sqlSession.selectOne("post.getPost",postId);
+	}
+
+	@Override
+	public List<Post> getPostPagingList(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.selectList("post.getPostPagingList",map);
+	}
+
+	@Override
+	public int getPostTotalCnt(SqlSession sqlSession, String boardId) {
+		return  sqlSession.selectOne("post.getPostTotalCnt", boardId);
+	}
+
+	@Override
+	public List<Post> getAllBoardPost(SqlSession sqlSession, int boardId) {
+		return sqlSession.selectList("post.getAllBoardPost", boardId);
+	}
+
+
+
+}

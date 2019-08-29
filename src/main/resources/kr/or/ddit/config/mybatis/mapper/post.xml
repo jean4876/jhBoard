@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+
+	<select id="getAllBoardPost" resultType="postVO"
+		parameterType="int">
+		select * from test_post where boardId = #{boardId}
+	</select>
+
+	<insert id="insertPost" parameterType="postVO">
+		insert into
+		test_post(boardId, parentPost, postContent, postId, postReg_dt,
+		postTitle, postUse, userId )
+		VALUES (#{boardId}, #{parentPost},
+		#{postContent}, test_post_seq.nextval, sysdate, #{postTitle}, "사용",
+		#{userId})
+	</insert>
+
+	<update id="updatePost" parameterType="postVO">
+		update test_post set
+		postContent = #{postContent}, postTitle = #{postTitle}, postUse =
+		#{postUse}
+		where boardId= #{boardId}
+	</update>
+
+	<select id="getPost" parameterType="String">
+		select * from test_post where
+		boardId = #{boardId}
+	</select>
+
+	<select id="getPostPagingList" parameterType="map"
+		resultType="postVO">
+		select a.*
+		from (select rownum rn, a.*
+		from (select a.*
+		from test_post a
+		where BOARDID = #{boardId}
+		order by 1) a) a
+		where rn between #{pagesize}*(#{page}-1) + 1 and #{page}*#{pagesize}
+	</select>
+
+
+
+</mapper>
