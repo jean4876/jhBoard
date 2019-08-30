@@ -44,17 +44,7 @@ public class PostServiceImpl implements IPostService {
 	}
 
 	@Override
-	public int deletePost(String postId) {
-		SqlSession sqlSession = MybatisUtil.getSession();
-
-		int res = postDao.deletePost(sqlSession, postId);
-		sqlSession.commit();
-		sqlSession.close();
-		return res;
-	}
-
-	@Override
-	public Post getPost(String postId) {
+	public Post getPost(int postId) {
 	      SqlSession sqlSession = MybatisUtil.getSession();
 	      Post post = postDao.getPost(sqlSession, postId);
 	      sqlSession.close();
@@ -82,6 +72,15 @@ public class PostServiceImpl implements IPostService {
 		sqlSession.close();
 
 		return postList;
+	}
+
+	@Override
+	public int notUsePost(int postId) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int res = postDao.notUsePost(sqlSession, postId);
+		sqlSession.commit();
+		sqlSession.close();
+		return res;
 	}
 
 

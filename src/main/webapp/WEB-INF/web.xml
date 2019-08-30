@@ -36,6 +36,41 @@
 		<servlet-name>EnterBoardController</servlet-name>
 		<servlet-class>kr.or.ddit.board.web.board.EnterBoardController</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>writePostController</display-name>
+		<servlet-name>writePostController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.post.writePostController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>awritePostController</display-name>
+		<servlet-name>awritePostController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.post.writePostController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>PostController</display-name>
+		<servlet-name>PostController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.post.PostController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>DeletePostController</display-name>
+		<servlet-name>DeletePostController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.post.DeletePostController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ModifyPostController</display-name>
+		<servlet-name>ModifyPostController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.post.ModifyPostController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>UserloginController</servlet-name>
 		<url-pattern>/UserloginController</url-pattern>
@@ -55,6 +90,26 @@
 	<servlet-mapping>
 		<servlet-name>EnterBoardController</servlet-name>
 		<url-pattern>/EnterBoardController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>writePostController</servlet-name>
+		<url-pattern>/writePostController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>awritePostController</servlet-name>
+		<url-pattern>/awritePostController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PostController</servlet-name>
+		<url-pattern>/PostController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeletePostController</servlet-name>
+		<url-pattern>/DeletePostController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyPostController</servlet-name>
+		<url-pattern>/ModifyPostController</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

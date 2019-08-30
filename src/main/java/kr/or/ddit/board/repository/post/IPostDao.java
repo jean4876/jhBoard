@@ -49,7 +49,7 @@ public interface IPostDao {
 	 * @param userId
 	 * @return Method 설명 : 게시글 상세조회
 	 */
-	Post getPost(SqlSession sqlSession, String postId);
+	Post getPost(SqlSession sqlSession, int postId);
 
 	/**
 	 *
@@ -71,5 +71,17 @@ public interface IPostDao {
 	int getPostTotalCnt(SqlSession sqlSession, String boardId);
 
 	List<Post> getAllBoardPost(SqlSession sqlSession, int boardId);
+
+	/**
+	 *
+	 * Method : notUsePost
+	 * 작성자 : PC-23
+	 * 변경이력 :
+	 * @param sqlSession
+	 * @param postId
+	 * @return
+	 * Method 설명 : 글 삭제는 아니고 그냥 사용못하게 해버리기
+	 */
+	int notUsePost(SqlSession sqlSession, int postId);
 
 }

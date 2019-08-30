@@ -9,9 +9,9 @@ public class Post {
 	private String userId;
 	private int boardId;
 	private int parentPost;
-	private int postUse;
-	
-	
+	private String postUse;
+
+
 	public int getPostId() {
 		return postId;
 	}
@@ -54,13 +54,13 @@ public class Post {
 	public void setParentPost(int parentPost) {
 		this.parentPost = parentPost;
 	}
-	public int getPostUse() {
+	public String getPostUse() {
 		return postUse;
 	}
-	public void setPostUse(int postUse) {
+	public void setPostUse(String postUse) {
 		this.postUse = postUse;
 	}
-	
-	
+
+
 
 }

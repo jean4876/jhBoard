@@ -14,7 +14,7 @@
 	</update>
 
 	<select id="getAllBoard" resultType="boardVO">
-		select * from test_board
+		select * from test_board order by 1
 	</select>
 
 	<select id="getBoard" resultType="boardVO">

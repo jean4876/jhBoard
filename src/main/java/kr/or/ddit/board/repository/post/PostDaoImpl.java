@@ -26,7 +26,7 @@ public class PostDaoImpl implements IPostDao {
 	}
 
 	@Override
-	public Post getPost(SqlSession sqlSession, String postId) {
+	public Post getPost(SqlSession sqlSession, int postId) {
 		return sqlSession.selectOne("post.getPost",postId);
 	}
 
@@ -43,6 +43,11 @@ public class PostDaoImpl implements IPostDao {
 	@Override
 	public List<Post> getAllBoardPost(SqlSession sqlSession, int boardId) {
 		return sqlSession.selectList("post.getAllBoardPost", boardId);
+	}
+
+	@Override
+	public int notUsePost(SqlSession sqlSession, int postId) {
+		return sqlSession.update("post.notUsePost", postId);
 	}
 
 

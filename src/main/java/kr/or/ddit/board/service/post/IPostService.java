@@ -30,15 +30,6 @@ public interface IPostService {
 
 	public int updatePost(Post post);
 
-	/**
-	 *
-	 * Method : deleteUser 작성자 : PC-23 변경이력 :
-	 *
-	 * @param sqlSession
-	 * @param userId
-	 * @return Method 설명 : 게시글 삭제
-	 */
-	int deletePost(String postId);
 
 	/**
 	 *
@@ -48,7 +39,7 @@ public interface IPostService {
 	 * @param userId
 	 * @return Method 설명 : 게시글 상세조회
 	 */
-	Post getPost(String postId);
+	Post getPost(int postId);
 
 	/**
 	 *
@@ -61,6 +52,18 @@ public interface IPostService {
 	 List<Post> getPostPagingList(Map<String, Object> map);
 
 	 List<Post> getAllBoardPost(int boardId);
+
+	 /**
+	 *
+	 * Method : notUsePost
+	 * 작성자 : PC-23
+	 * 변경이력 :
+	 * @param sqlSession
+	 * @param postId
+	 * @return
+	 * Method 설명 : 글 삭제는 아니고 그냥 사용못하게 해버리기
+	 */
+	int notUsePost(int postId);
 
 
 

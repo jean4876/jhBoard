@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.board.repository.board.BoardDaoImpl"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,7 +13,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
@@ -30,63 +30,111 @@
 		});
 	})
 </script>
-
 </head>
 
+<!-- header -->
+<%@ include file="/commonJsp/header.jsp"%>
 <body>
-	<!-- header -->
-	<%@ include file="/commonJsp/header.jsp"%>
+	<form id="frm" action="${cp }/post" method="get">
+		<input type="hidden" id="postId" name="postId" />
+	</form>
 	<div class="container-fluid">
 		<div class="row">
+
 			<div class="col-sm-3 col-md-2 sidebar">
 				<!-- left -->
 				<%@ include file="/commonJsp/left.jsp"%>
 			</div>
-	<form id="frm" action="${cp }/post" method="get">
-		<input type="hidden" id="postId" name="postId" />
-	</form>
 
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="row">
+					<div class="col-sm-8 blog-main">
+						<h2 class="sub-header">${board.boardNm}</h2>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<tr>
+									<th>게시글 번호</th>
+									<th>제목</th>
+									<th>작성자 아이디</th>
+									<th>작성일시</th>
+								</tr>
 
+								<c:forEach items="${postList}" var="post">
+									<c:choose>
+										<c:when test = "${post.postUse  == '미사용'}">
+											<tr>
+												<td>${post.postId}</td>
+												<td>삭제된 게시글 입니다.</td>
+												<td>${post.userId}</td>
+												<td>${post.postReg_dt}</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<tr class="postTr" data-postId="${post.postId}">
+												<td>${post.postId}</td>
+												<td>${post.postTitle}</td>
+												<td>${post.userId}</td>
+												<td>${post.postReg_dt}</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
 
-		<div class="row">
-			<div class="col-sm-8 blog-main">
-				<h2 class="sub-header">${board.boardNm}</h2>
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<tr>
-							<th>게시글 번호</th>
-							<th>제목</th>
-							<th>작성자 아이디</th>
-							<th>작성일시</th>
-						</tr>
+							</table>
+						</div>
 
-						<c:forEach items="${postList}" var="post">
-							<tr class="postTr" data-postid="${post.postId}">
-								<td>${post.postId}</td>
-								<td>${post.postTitle}</td>
-								<td>${post.userId}</td>
-								<td>${post.postReg_dt}</td>
+						<a href="${cp }/writePost?boardId=${board.boardId}" class="btn btn-default pull-right">글 쓰기</a>
 
-							</tr>
-						</c:forEach>
+						<div class="text-center">
+							<ul class="pagination">
+								<%-- 이전 페이지 가기 : 지금 있는 페이지에서 한페이지 전으로
+                             단 1페이지인 경우는 li 태그에 class="disabled"를 추가하고 이동 경로는 차단
+                         --%>
+								<c:choose>
+									<c:when test="${pageVo.page == 1 }">
+										<li class="disabled"><a href="#" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a
+											href="${cp }/enterBoard?page=${pageVo.page-1 }&pagesize=10"
+											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										</a></li>
+									</c:otherwise>
+								</c:choose>
 
-					</table>
-				</div>
-
-				<div class="text-center">
-					<ul class="pagination">
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-					</ul>
+								<c:forEach begin="1" end="${paginationSize}" var="page">
+									<%-- 방법1 --%>
+									<c:choose>
+										<c:when test="${page == pageVo.page}">
+											<li class="active"><span>${page }</span></li>
+										</c:when>
+										<c:otherwise>
+											<li><a
+												href="${cp }/enterBoard?page=${page }&pagesize=10">${page }</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${pageVo.page == paginationSize }">
+										<li class="disabled"><a href="#" aria-label="Next"> <span
+												aria-hidden="true">&raquo;</span>
+										</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a
+											href="${cp }/enterBoard?page=${pageVo.page+1 }&pagesize=10"
+											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
 	</div>
 </body>
 </html>
