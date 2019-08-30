@@ -16,6 +16,9 @@
 		VALUES (#{boardId}, NULL,
 		#{postContent}, test_post_seq.nextval, sysdate, #{postTitle}, '사용',
 		#{userId})
+		<selectKey keyProperty="postId">
+				select  test_post_seq.currval from dual
+		</selectKey>
 	</insert>
 
 	<update id="updatePost" parameterType="postVO">

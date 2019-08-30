@@ -26,10 +26,10 @@ public class PostServiceImpl implements IPostService {
 	public int insertPost(Post post) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 
-		int res = postDao.insertPost(sqlSession, post);
+		postDao.insertPost(sqlSession, post);
 		sqlSession.commit();
 		sqlSession.close();
-		return res;
+		return post.getPostId();
 
 	}
 

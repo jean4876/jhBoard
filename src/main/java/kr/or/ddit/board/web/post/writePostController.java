@@ -59,6 +59,7 @@ public class writePostController extends HttpServlet {
 		String postTitle = request.getParameter("postTitle");
 		String postContent = request.getParameter("smarteditor");
 		String userId = sessionUser.getUserId();
+
 		logger.debug("boardID = {} " , request.getParameter("boardId"));
 
 		Post post = new Post();
@@ -68,11 +69,11 @@ public class writePostController extends HttpServlet {
 		post.setPostContent(postContent);
 		post.setUserId(userId);
 
-		int res = postService.insertPost(post);
+		int postId = postService.insertPost(post);
 
-		logger.debug("생성결과 : {}" , res);
+		response.sendRedirect(request.getContextPath() + "/post?postId="+ postId);
 
-		doGet(request, response);
+
 
 	}
 
