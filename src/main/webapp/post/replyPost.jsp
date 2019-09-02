@@ -38,7 +38,7 @@ $(document).ready(function(){
 	});
 	// 전송버튼 클릭이벤트
 	$("#savebutton").click(function(){
-		if(confirm("수정하시겠습니까?")) {
+		if(confirm("저장하시겠습니까?")) {
 			// id가 smarteditor인 textarea에 에디터에서 대입
 			oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
 			// 이부분에 에디터 validation 검증
@@ -60,23 +60,12 @@ function validation(){
 	return true;
 }
 
-function spanClick(fileId) {
-	   var data = fileId
-	   $('#uploadFile').val(data);
-	   $('#deleteFileForm').submit();
-}
-
 </script>
 
 </head>
 <!--header  -->
 <%@include file="/commonJsp/header.jsp"%>
 <body>
-	<form id="deleteFileForm" class="form-horizontal" role="form" action="${cp }/deleteFile" method="get">
-		<input type="hidden" id="uploadFile" name="uploadFile">
-		<input type="hidden" id="postId" name="postId" value = "${post.postId }">
-	</form>
-
 
    <div class="container-fluid">
       <div class="row">
@@ -87,42 +76,38 @@ function spanClick(fileId) {
          </div>
          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <form id ="frm" class="form-horizontal" role="form" action="${cp }/modifyPost" method="post" enctype="multipart/form-data">
-				<h1>&nbsp;&nbsp;&nbsp;&nbsp;게시글 수정</h1>
+            <form id ="frm" class="form-horizontal" role="form" action="${cp }/writePost" method="post" enctype="multipart/form-data">
+				<h1>&nbsp;&nbsp;&nbsp;&nbsp;게시판 글쓰기</h1>
+
+				<input type="hidden" name="boardId" value="${post.boardId }">
+				<input type="hidden" name="parentPost" value="${post.postId }">
+				<input type="hidden" name="gn" value="${post.gn }">
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">제목</label>
                   <div class="col-sm-6">
                      <input type="text" class="form-control" id="postTitle" name="postTitle"
-                        placeholder="제목" value="${post.postTitle }" >
+                        placeholder="제목" >
                   </div>
                </div>
 
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">글 내용</label>
                   <div class="col-sm-10">
-					<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;">
-						${post.postContent }
-					</textarea>
+					<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
                   </div>
                </div>
 
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">첨부파일</label>
                   <div class="col-sm-6">
-							<c:forEach items="${uploadFileList}" var="uploadFile">
-								<label class="control-label">${uploadFile.uploadFileNm}
-								<%-- data-fileId ="${uploadFile.uploadId}" --%>
-									<span  onclick="spanClick(${uploadFile.uploadId})" class="deleteFile glyphicon glyphicon-remove"></span>
-								</label>
-							</c:forEach>
                      <input type="file" multiple="multiple" class="form-control" id="picture" name="picture"
                         placeholder="사용자 사진">
                   </div>
                </div>
-               <input type="hidden" name="postId" value="${post.postId }">
+               <input type="hidden" name="boardId" value="${boardId }">
                <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                     <input type="button" id="savebutton" value="수정완료" />
+                     <input type="button" id="savebutton" value="서버전송" />
                   </div>
                </div>
             </form>

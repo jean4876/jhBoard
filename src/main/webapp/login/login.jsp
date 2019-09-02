@@ -15,6 +15,7 @@
     <!-- Bootstrap core CSS -->
     <link href="${cp }/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
+
     <link href="${cp }/css/signin.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="${cp }/js/jquery-3.4.1.min.js"></script>
@@ -47,6 +48,7 @@
            String userId = request.getParameter("userId");
            userId = userId == null ? "" : userId;
         %>
+
         <input type="text" id="userId" name="userId" class="form-control"
               placeholder="userId" required>
         <label for="pass" class="sr-only">Password</label>

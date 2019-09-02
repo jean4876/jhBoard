@@ -10,6 +10,8 @@
 		<typeAlias alias="userVO" type="kr.or.ddit.user.model.User"/>
 		<typeAlias alias="boardVO" type="kr.or.ddit.board.model.Board"/>
 		<typeAlias alias="postVO" type="kr.or.ddit.board.model.Post"/>
+		<typeAlias alias="cmtVO" type="kr.or.ddit.board.model.Cmt"/>
+		<typeAlias alias="uploadFileVO" type="kr.or.ddit.board.model.UploadFile"/>
 	</typeAliases>
 
   <environments default="development">
@@ -28,5 +30,7 @@
     <mapper resource="kr/or/ddit/config/mybatis/mapper/user.xml"/>
     <mapper resource="kr/or/ddit/config/mybatis/mapper/board.xml"/>
     <mapper resource="kr/or/ddit/config/mybatis/mapper/post.xml"/>
+    <mapper resource="kr/or/ddit/config/mybatis/mapper/cmt.xml"/>
+    <mapper resource="kr/or/ddit/config/mybatis/mapper/uploadFile.xml"/>
   </mappers>
 </configuration>

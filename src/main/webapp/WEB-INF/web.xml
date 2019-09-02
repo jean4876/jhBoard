@@ -71,6 +71,34 @@
 		<servlet-name>ModifyPostController</servlet-name>
 		<servlet-class>kr.or.ddit.board.web.post.ModifyPostController</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ReplyPostController</display-name>
+		<servlet-name>ReplyPostController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.post.ReplyPostController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>WriteCmtController</display-name>
+		<servlet-name>WriteCmtController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.cmt.WriteCmtController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>deleteCmtController</display-name>
+		<servlet-name>deleteCmtController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.cmt.deleteCmtController</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>DeleteFileController</display-name>
+		<servlet-name>DeleteFileController</servlet-name>
+		<servlet-class>kr.or.ddit.board.web.uploadFile.DeleteFileController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>UserloginController</servlet-name>
 		<url-pattern>/UserloginController</url-pattern>
@@ -110,6 +138,22 @@
 	<servlet-mapping>
 		<servlet-name>ModifyPostController</servlet-name>
 		<url-pattern>/ModifyPostController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ReplyPostController</servlet-name>
+		<url-pattern>/ReplyPostController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>WriteCmtController</servlet-name>
+		<url-pattern>/WriteCmtController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>deleteCmtController</servlet-name>
+		<url-pattern>/deleteCmtController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteFileController</servlet-name>
+		<url-pattern>/DeleteFileController</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

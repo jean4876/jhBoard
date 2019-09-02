@@ -47,6 +47,16 @@ $(document).ready(function(){
 			}
 		}
 	})
+	$("#picture").change(function(){
+
+		var fileInput = document.getElementById("picture");
+		var files = fileInput.files;
+		if(files.length > 5){
+			alert("파일은 5개까지 올릴수 있습니다.");
+			$('#picture').val("");
+		}
+	})
+
 });
 
 // 필수값 Check
@@ -78,6 +88,9 @@ function validation(){
 
             <form id ="frm" class="form-horizontal" role="form" action="${cp }/writePost" method="post" enctype="multipart/form-data">
 				<h1>&nbsp;&nbsp;&nbsp;&nbsp;게시판 글쓰기</h1>
+
+				<input type="hidden" name="parentPost">
+				<input type="hidden" name="gn">
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">제목</label>
                   <div class="col-sm-6">
@@ -96,8 +109,8 @@ function validation(){
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">첨부파일</label>
                   <div class="col-sm-6">
-                     <input type="file" class="form-control" id="picture" name="picture"
-                        placeholder="사용자 사진">
+                     <input type="file" maxlength="5" multiple="multiple"
+                     class="form-control" id="picture" name="picture">
                   </div>
                </div>
                <input type="hidden" name="boardId" value="${boardId }">

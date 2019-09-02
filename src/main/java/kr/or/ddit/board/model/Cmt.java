@@ -7,6 +7,9 @@ public class Cmt {
 	private String cmtReg_dt;
 	private int postId;
 	private String userId;
+	private	String cmtUse;
+
+
 	public int getCmtId() {
 		return cmtId;
 	}
@@ -37,7 +40,20 @@ public class Cmt {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	
+
+
+	public String getCmtUse() {
+		return cmtUse;
+	}
+	public void setCmtUse(String cmtUse) {
+		this.cmtUse = cmtUse;
+	}
+	@Override
+	public String toString() {
+		return "Cmt [cmtId=" + cmtId + ", cmtContent=" + cmtContent + ", cmtReg_dt=" + cmtReg_dt + ", postId=" + postId
+				+ ", userId=" + userId + ", cmtUse=" + cmtUse + "]";
+	}
+
+
 
 }

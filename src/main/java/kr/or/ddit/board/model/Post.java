@@ -10,6 +10,7 @@ public class Post {
 	private int boardId;
 	private int parentPost;
 	private String postUse;
+	private int gn;
 
 
 	public int getPostId() {
@@ -59,6 +60,12 @@ public class Post {
 	}
 	public void setPostUse(String postUse) {
 		this.postUse = postUse;
+	}
+	public int getGn() {
+		return gn;
+	}
+	public void setGn(int gn) {
+		this.gn = gn;
 	}
 
 

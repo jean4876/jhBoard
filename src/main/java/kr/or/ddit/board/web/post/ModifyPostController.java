@@ -1,6 +1,8 @@
 package kr.or.ddit.board.web.post;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.board.model.Post;
+import kr.or.ddit.board.model.UploadFile;
 import kr.or.ddit.board.service.post.PostServiceImpl;
+import kr.or.ddit.board.service.uploadFile.UploadFileServiceImpl;
 import kr.or.ddit.user.model.User;
 
 @WebServlet("/modifyPost")
@@ -35,8 +39,11 @@ public class ModifyPostController extends HttpServlet {
 		int postId = Integer.parseInt(request.getParameter("postId"));
 
 		PostServiceImpl postService = new PostServiceImpl();
+		UploadFileServiceImpl uploadFileService = new UploadFileServiceImpl();
 		Post post =  postService.getPost(postId);
+		List<UploadFile> uploadFileList = uploadFileService.getPostUploadFileList(postId);
 		request.setAttribute("post", post);
+		request.setAttribute("uploadFileList", uploadFileList);
 
 		request.getRequestDispatcher("/post/modifyPost.jsp").forward(request, response);
 
@@ -65,7 +72,7 @@ public class ModifyPostController extends HttpServlet {
 
 		logger.debug("생성결과 : {}" , res);
 
-		doGet(request, response);
+		response.sendRedirect(request.getContextPath() + "/post?postId="+ postId);
 	}
 
 }

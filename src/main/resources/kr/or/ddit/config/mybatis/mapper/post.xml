@@ -10,13 +10,14 @@
 	</select>
 
 	<insert id="insertPost" parameterType="postVO">
+
 		insert into
 		test_post(boardId, parentPost, postContent, postId, postReg_dt,
-		postTitle, postUse, userId )
-		VALUES (#{boardId}, NULL,
+		postTitle, postUse, userId, gn)
+		VALUES (#{boardId}, case when NVL(#{parentPost},0) = 0 then NULL else #{parentPost} end,
 		#{postContent}, test_post_seq.nextval, sysdate, #{postTitle}, '사용',
-		#{userId})
-		<selectKey keyProperty="postId">
+		#{userId}, case when NVL(#{gn},0) = 0 then test_post_seq.currval else #{gn} end)
+		<selectKey keyProperty="postId" resultType="Integer" >
 				select  test_post_seq.currval from dual
 		</selectKey>
 	</insert>
@@ -33,10 +34,6 @@
 		where postId = #{postId}
 	</update>
 
-
-
-
-
 	<select id="getPost" parameterType="Integer" resultType="postVO">
 		select * from test_post where
 		postId = #{postId}
@@ -52,7 +49,4 @@
 		order by 1) a) a
 		where rn between #{pagesize}*(#{page}-1) + 1 and #{page}*#{pagesize}
 	</select>
-
-
-
 </mapper>
