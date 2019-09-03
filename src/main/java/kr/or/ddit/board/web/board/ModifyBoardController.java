@@ -2,6 +2,7 @@ package kr.or.ddit.board.web.board;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,21 +33,6 @@ public class ModifyBoardController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-
-		HashMap<String, String> map = new HashMap<String, String>();
-
-		logger.debug("boardId = {}", request.getParameter("boardId"));
-		logger.debug("boardUse = {}", request.getParameter("boardUse"));
-
-		map.put("boardId", request.getParameter("boardId"));
-		map.put("boardUse", request.getParameter("boardUse"));
-
-		logger.debug("Map = {}", map);
-
-		BoardServiceImpl boardService = new BoardServiceImpl();
-		int res = boardService.updateBoard(map);
-		logger.debug("update res = {}", res);
 
 		request.getRequestDispatcher("/board/manageBoard.jsp").forward(request, response);
 	}
@@ -55,27 +42,25 @@ public class ModifyBoardController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		HttpSession session = request.getSession();
-		PostServiceImpl postService = new PostServiceImpl();
-		User sessionUser =  (User) session.getAttribute("S_USERVO");
+		BoardServiceImpl boardService = new BoardServiceImpl();
 
+		//update test_board set boarduse = #{boardUse} where boardId = #{boardId}
+
+		String boardUse = request.getParameter("boardUse");
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
-		String postTitle = request.getParameter("postTitle");
-		String postContent = request.getParameter("smarteditor");
-		String userId = sessionUser.getUserId();
-		logger.debug("boardID = {} " , request.getParameter("boardId"));
 
-		Post post = new Post();
+		//int updateBoard(SqlSession sqlSession, Map<String, String> map);
 
-		post.setBoardId(boardId);
-		post.setPostTitle(postTitle);
-		post.setPostContent(postContent);
-		post.setUserId(userId);
+		Map<String, Object> map = new HashMap<String, Object>();
 
-		int res = postService.insertPost(post);
+		map.put("boardUse", boardUse);
+		map.put("boardId", boardId);
 
-		logger.debug("생성결과 : {}" , res);
+		boardService.updateBoard(map);
 
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+		doGet(request, response);
+
+
 
 	}
 

@@ -33,16 +33,6 @@ public interface IPostDao {
 
 	/**
 	 *
-	 * Method : deleteUser 작성자 : PC-23 변경이력 :
-	 *
-	 * @param sqlSession
-	 * @param userId
-	 * @return Method 설명 : 게시글 삭제
-	 */
-	int deletePost(SqlSession sqlSession, String postId);
-
-	/**
-	 *
 	 * Method : getUser 작성자 : PC-11 변경이력 :
 	 *
 	 * @param sqlSession
@@ -68,9 +58,8 @@ public interface IPostDao {
 	 * @param sqlSession
 	 * @return Method 설명 : 해당 게시판의 게시글 건수 조회
 	 */
-	int getPostTotalCnt(SqlSession sqlSession, String boardId);
+	int getPostTotalCnt(SqlSession sqlSession, int boardId);
 
-	List<Post> getAllBoardPost(SqlSession sqlSession, int boardId);
 
 	/**
 	 *

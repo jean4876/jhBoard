@@ -42,7 +42,7 @@ public interface IBoardDao {
 	 * @return
 	 * Method 설명 : 게시판의 사용여부를 바꾼다.
 	 */
-	int updateBoard(SqlSession sqlSession, Map<String, String> map);
+	int updateBoard(SqlSession sqlSession, Map<String, Object> map);
 
 	/**
 	 *

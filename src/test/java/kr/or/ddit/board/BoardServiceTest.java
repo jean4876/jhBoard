@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,16 +27,16 @@ public class BoardServiceTest {
 
 	@Test
 	public void buildBoard(){
-		/***Given***/
-		Map<String, String> map = new HashMap<String, String>();
-
-		/***When***/
-		map.put("boardNm", "JunitTest");
-		map.put("boardUse", "사용");
-		int res = boardService.buildBoard(map);
-
-		/***Then***/
-		assertEquals(1, res);
+//		/***Given***/
+//		Map<String, String> map = new HashMap<String, String>();
+//
+//		/***When***/
+//		map.put("boardNm", "JunitTest");
+//		map.put("boardUse", "사용");
+//		int res = boardService.buildBoard(map);
+//
+//		/***Then***/
+//		assertEquals(1, res);
 
 	}
 
@@ -47,13 +48,13 @@ public class BoardServiceTest {
 		List<Board> list = boardService.getAllBoard();
 
 		/***Then***/
-		assertEquals(8, list.size());
+		assertEquals(10, list.size());
 	}
 
 	@Test
 	public void updateBoard() {
 		/***Given***/
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		/***When***/
 		map.put("boardId", "2");
@@ -62,6 +63,19 @@ public class BoardServiceTest {
 
 		/***Then***/
 		assertEquals(1, res);
+	}
+
+	@Test
+	public void getBoard() {
+		/***Given***/
+
+		/***When***/
+		Board res = boardService.getBoard(1);
+
+		/***Then***/
+		assertEquals("공지사항", res.getBoardNm());
+
+
 	}
 
 

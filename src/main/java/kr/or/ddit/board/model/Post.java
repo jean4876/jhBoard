@@ -11,8 +11,17 @@ public class Post {
 	private int parentPost;
 	private String postUse;
 	private int gn;
+	private int level;
 
 
+
+
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public int getPostId() {
 		return postId;
 	}

@@ -20,10 +20,6 @@ public class PostDaoImpl implements IPostDao {
 		return  sqlSession.update("post.updatePost", post);
 	}
 
-	@Override
-	public int deletePost(SqlSession sqlSession, String postId) {
-		return  sqlSession.delete("post.deletePost", postId);
-	}
 
 	@Override
 	public Post getPost(SqlSession sqlSession, int postId) {
@@ -36,14 +32,10 @@ public class PostDaoImpl implements IPostDao {
 	}
 
 	@Override
-	public int getPostTotalCnt(SqlSession sqlSession, String boardId) {
+	public int getPostTotalCnt(SqlSession sqlSession, int boardId) {
 		return  sqlSession.selectOne("post.getPostTotalCnt", boardId);
 	}
 
-	@Override
-	public List<Post> getAllBoardPost(SqlSession sqlSession, int boardId) {
-		return sqlSession.selectList("post.getAllBoardPost", boardId);
-	}
 
 	@Override
 	public int notUsePost(SqlSession sqlSession, int postId) {

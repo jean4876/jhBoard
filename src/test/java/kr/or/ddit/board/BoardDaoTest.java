@@ -42,20 +42,20 @@ public class BoardDaoTest {
 	   }
 
 
-	@Test
-	public void buildBoard(){
-		/***Given***/
-		Map<String, String> map = new HashMap<String, String>();
-
-		/***When***/
-		map.put("boardNm", "JunitTest");
-		map.put("boardUse", "사용");
-		int res = boardDao.buildBoard(sqlSession, map);
-
-		/***Then***/
-		assertEquals(1, res);
-
-	}
+//	@Test
+//	public void buildBoard(){
+//		/***Given***/
+//		Map<String, String> map = new HashMap<String, String>();
+//
+//		/***When***/
+//		map.put("boardNm", "JunitTest");
+//		map.put("boardUse", "사용");
+//		int res = boardDao.buildBoard(sqlSession, map);
+//
+//		/***Then***/
+//		assertEquals(1, res);
+//
+//	}
 
 	@Test
 	public void getAllBoard() {
@@ -65,13 +65,13 @@ public class BoardDaoTest {
 		List<Board> list = boardDao.getAllBoard(sqlSession);
 
 		/***Then***/
-		assertEquals(8, list.size());
+		assertEquals(10, list.size());
 	}
 
 	@Test
 	public void updateBoard() {
 		/***Given***/
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		/***When***/
 		map.put("boardId", "2");
@@ -80,6 +80,18 @@ public class BoardDaoTest {
 
 		/***Then***/
 		assertEquals(1, res);
+	}
+
+	@Test
+	public void getBoard() {
+		/***Given***/
+
+		/***When***/
+		Board res = boardDao.getBoard(sqlSession, 1);
+
+		/***Then***/
+		assertEquals("공지사항", res.getBoardNm());
+
 	}
 
 

@@ -41,12 +41,21 @@
 
 	<select id="getPostPagingList" parameterType="map"
 		resultType="postVO">
-		select a.*
-		from (select rownum rn, a.*
-		from (select a.*
-		from test_post a
-		where BOARDID = #{boardId}
-		order by 1) a) a
-		where rn between #{pagesize}*(#{page}-1) + 1 and #{page}*#{pagesize}
+      select a.*
+      from
+      (select rownum rn, a.*
+       from
+          (select postId, parentPost, lpad(' ', (level-1)*4, ' ') || POSTTITLE POSTTITLE, USERID, postreg_dt, level, postUse
+            from test_post a
+            where boardId = #{boardId}
+           start with parentPost is null
+           connect by prior postId = parentPost
+           order SIBLINGS by gn desc, postId) a) a
+      where rn between (#{page}-1)*#{pagesize}+1 and #{page}*#{pagesize}
 	</select>
+
+	<select id="getPostTotalCnt" parameterType="Integer" resultType="Integer">
+		select count(*) from test_post where boardId = #{boardId}
+	</select>
+
 </mapper>

@@ -51,7 +51,6 @@ public interface IPostService {
 	 */
 	 List<Post> getPostPagingList(Map<String, Object> map);
 
-	 List<Post> getAllBoardPost(int boardId);
 
 	 /**
 	 *
@@ -64,6 +63,8 @@ public interface IPostService {
 	 * Method 설명 : 글 삭제는 아니고 그냥 사용못하게 해버리기
 	 */
 	int notUsePost(int postId);
+
+	int getPostTotalCnt(int boardId);
 
 
 

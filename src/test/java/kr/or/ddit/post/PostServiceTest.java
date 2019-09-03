@@ -1,44 +1,29 @@
 package kr.or.ddit.post;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.board.model.Post;
-import kr.or.ddit.board.repository.post.IPostDao;
-import kr.or.ddit.board.repository.post.PostDaoImpl;
-import kr.or.ddit.util.MybatisUtil;
+import kr.or.ddit.board.service.post.IPostService;
+import kr.or.ddit.board.service.post.PostServiceImpl;
 
-public class PostDaoTest {
+public class PostServiceTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(PostDaoTest.class);
+	private IPostService postService;
 
-	private IPostDao postDao;
-	private SqlSession sqlSession;
+	@Before
+	public void setUp() throws Exception {
 
-   // 테스트에 공통적으로 필요한 자원을 생성 / 초기화
-   @Before
-   public void setup() {
-      logger.debug("before");
-      postDao = new PostDaoImpl();
-      sqlSession = MybatisUtil.getSession();
-   }
+		postService = new PostServiceImpl();
 
-   // 테스트에 공통적으로 사용한 자원을 해제
-   @After
-   public void tearDown() {
-      logger.debug("after");
-      sqlSession.close();
-   }
+	}
 
 //	@Test
 //	public void insertPost() {
@@ -70,7 +55,7 @@ public class PostDaoTest {
 		post.setPostContent(postContent);
 		post.setPostTitle(postTitle);
 		post.setPostId(postId);
-		int res = postDao.updatePost(sqlSession, post);
+		int res = postService.updatePost( post);
 
 		/***Then***/
 		assertEquals(1, res);
@@ -84,7 +69,7 @@ public class PostDaoTest {
 		int postId = 1;
 
 		/***When***/
-		Post post = postDao.getPost(sqlSession, postId);
+		Post post = postService.getPost(postId);
 
 		/***Then***/
 		assertEquals(1, post.getPostId());
@@ -102,7 +87,7 @@ public class PostDaoTest {
 		map.put("pagesize", 10);
 		map.put("boardId", 1);
 
-		List<Post> res = postDao.getPostPagingList(sqlSession, map);
+		List<Post> res = postService.getPostPagingList(map);
 
 		/***Then***/
 		assertEquals(0, res.size());
@@ -114,7 +99,7 @@ public class PostDaoTest {
 		int boardId = 4;
 
 		/***When***/
-		int res = postDao.getPostTotalCnt(sqlSession, boardId);
+		int res = postService.getPostTotalCnt(boardId);
 
 		/***Then***/
 		assertEquals(0, res);
@@ -128,13 +113,11 @@ public class PostDaoTest {
 		int postId = 8;
 
 		/***When***/
-		int res = postDao.notUsePost(sqlSession, postId);
+		int res = postService.notUsePost(postId);
 		/***Then***/
 		assertEquals(1, res);
 
 	}
-
-
 
 
 }

@@ -14,20 +14,22 @@ import org.slf4j.LoggerFactory;
 import kr.or.ddit.board.model.UploadFile;
 import kr.or.ddit.board.repository.uploadFile.IUploadFileDao;
 import kr.or.ddit.board.repository.uploadFile.UploadFileDaoImpl;
+import kr.or.ddit.board.service.uploadFile.IUploadFileService;
+import kr.or.ddit.board.service.uploadFile.UploadFileServiceImpl;
 import kr.or.ddit.util.MybatisUtil;
 
-public class UploadFileDaoTest {
+public class UploadFileServiceTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadFileDaoTest.class);
 
-	private IUploadFileDao uploadFileDao;
+	private IUploadFileService uploadFileService;
 	private SqlSession sqlSession;
 
    // 테스트에 공통적으로 필요한 자원을 생성 / 초기화
    @Before
    public void setup() {
       logger.debug("before");
-      uploadFileDao = new UploadFileDaoImpl();
+      uploadFileService = new UploadFileServiceImpl();
       sqlSession = MybatisUtil.getSession();
    }
 
@@ -59,7 +61,7 @@ public class UploadFileDaoTest {
 		logger.debug("uploadFIle = {}" , uploadFile);
 
 		/***Then***/
-		uploadFileDao.insertPostUploadFile(sqlSession, uploadFile);
+		uploadFileService.insertPostUploadFile(uploadFile);
 
 	}
 
@@ -72,7 +74,7 @@ public class UploadFileDaoTest {
 		logger.debug("postId = {} ", postId);
 
 		/***When***/
-		List<UploadFile> fileList = uploadFileDao.getPostUploadFileList(sqlSession, postId);
+		List<UploadFile> fileList = uploadFileService.getPostUploadFileList(postId);
 
 		logger.debug("fileListSize = {}" , fileList.size());
 
@@ -89,7 +91,7 @@ public class UploadFileDaoTest {
 
 
 		/***When***/
-		UploadFile file = uploadFileDao.getPostUploadFile(sqlSession, uploadId);
+		UploadFile file = uploadFileService.getPostUploadFile(uploadId);
 
 
 		/***Then***/
@@ -105,7 +107,7 @@ public class UploadFileDaoTest {
 //
 //
 //		/***When***/
-//		int res = uploadFileDao.deletePostUploadFile(sqlSession, uploadId);
+//		int res = uploadFileService.deletePostUploadFile(sqlSession, uploadId);
 //
 //
 //		/***Then***/
@@ -114,3 +116,4 @@ public class UploadFileDaoTest {
 //   }
 
 }
+

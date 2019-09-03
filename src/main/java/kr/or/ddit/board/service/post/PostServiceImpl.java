@@ -63,22 +63,21 @@ public class PostServiceImpl implements IPostService {
 
 	}
 
-	@Override
-	public List<Post> getAllBoardPost(int boardId) {
 
-		SqlSession sqlSession = MybatisUtil.getSession();
-
-		List<Post> postList = postDao.getAllBoardPost(sqlSession, boardId);
-		sqlSession.close();
-
-		return postList;
-	}
 
 	@Override
 	public int notUsePost(int postId) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int res = postDao.notUsePost(sqlSession, postId);
 		sqlSession.commit();
+		sqlSession.close();
+		return res;
+	}
+
+	@Override
+	public int getPostTotalCnt(int boardId) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int res = postDao.getPostTotalCnt(sqlSession, boardId);
 		sqlSession.close();
 		return res;
 	}

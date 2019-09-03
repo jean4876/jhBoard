@@ -16,7 +16,7 @@ public class BoardDaoImpl implements IBoardDao {
 	}
 
 	@Override
-	public int updateBoard(SqlSession sqlSession, Map<String, String> map) {
+	public int updateBoard(SqlSession sqlSession, Map<String, Object> map) {
 		return sqlSession.update("board.updateBoard", map);
 	}
 

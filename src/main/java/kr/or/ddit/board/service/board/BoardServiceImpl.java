@@ -30,7 +30,7 @@ public class BoardServiceImpl implements IBoardService {
 	}
 
 	@Override
-	public int updateBoard(Map<String, String> map) {
+	public int updateBoard(Map<String, Object> map) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int res = boardDao.updateBoard(sqlSession, map);
 		sqlSession.commit();

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +47,15 @@ $(document).ready(function(){
 			}
 		}
 	})
+		$("#picture").change(function(){
+
+		var fileInput = document.getElementById("picture");
+		var files = fileInput.files;
+		if(files.length > 5){
+			alert("파일은 5개까지 올릴수 있습니다.");
+			$('#picture').val("");
+		}
+	})
 });
 
 // 필수값 Check
@@ -72,62 +81,67 @@ function spanClick(fileId) {
 <!--header  -->
 <%@include file="/commonJsp/header.jsp"%>
 <body>
-	<form id="deleteFileForm" class="form-horizontal" role="form" action="${cp }/deleteFile" method="get">
-		<input type="hidden" id="uploadFile" name="uploadFile">
-		<input type="hidden" id="postId" name="postId" value = "${post.postId }">
+	<form id="deleteFileForm" class="form-horizontal" role="form"
+		action="${cp }/deleteFile" method="get">
+		<input type="hidden" id="uploadFile" name="uploadFile"> <input
+			type="hidden" id="postId" name="postId" value="${post.postId }">
 	</form>
 
 
-   <div class="container-fluid">
-      <div class="row">
+	<div class="container-fluid">
+		<div class="row">
 
-         <div class="col-sm-3 col-md-2 sidebar">
-            <!--left  -->
-            <%@ include file="/commonJsp/left.jsp"%>
-         </div>
-         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<!--left  -->
+				<%@ include file="/commonJsp/left.jsp"%>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-            <form id ="frm" class="form-horizontal" role="form" action="${cp }/modifyPost" method="post" enctype="multipart/form-data">
-				<h1>&nbsp;&nbsp;&nbsp;&nbsp;게시글 수정</h1>
-               <div class="form-group">
-                  <label for="userNm" class="col-sm-2 control-label">제목</label>
-                  <div class="col-sm-6">
-                     <input type="text" class="form-control" id="postTitle" name="postTitle"
-                        placeholder="제목" value="${post.postTitle }" >
-                  </div>
-               </div>
+				<form id="frm" class="form-horizontal" role="form"
+					action="${cp }/modifyPost" method="post"
+					enctype="multipart/form-data">
+					<h1>&nbsp;&nbsp;&nbsp;&nbsp;게시글 수정</h1>
+					<div class="form-group">
+						<label for="userNm" class="col-sm-2 control-label">제목</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="postTitle"
+								name="postTitle" placeholder="제목" value="${post.postTitle }">
+						</div>
+					</div>
 
-               <div class="form-group">
-                  <label for="userNm" class="col-sm-2 control-label">글 내용</label>
-                  <div class="col-sm-10">
-					<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;">
+					<div class="form-group">
+						<label for="userNm" class="col-sm-2 control-label">글 내용</label>
+						<div class="col-sm-10">
+							<textarea name="smarteditor" id="smarteditor" rows="10"
+								cols="100" style="width: 766px; height: 412px;">
 						${post.postContent }
 					</textarea>
-                  </div>
-               </div>
+						</div>
+					</div>
 
-               <div class="form-group">
-                  <label for="userNm" class="col-sm-2 control-label">첨부파일</label>
-                  <div class="col-sm-6">
+					<div class="form-group">
+						<label for="userNm" class="col-sm-2 control-label">첨부파일</label>
+						<div class="col-sm-6">
 							<c:forEach items="${uploadFileList}" var="uploadFile">
 								<label class="control-label">${uploadFile.uploadFileNm}
-								<%-- data-fileId ="${uploadFile.uploadId}" --%>
-									<span  onclick="spanClick(${uploadFile.uploadId})" class="deleteFile glyphicon glyphicon-remove"></span>
+									<%-- data-fileId ="${uploadFile.uploadId}" --%> <span
+									onclick="spanClick(${uploadFile.uploadId})"
+									class="deleteFile glyphicon glyphicon-remove"></span>
 								</label>
 							</c:forEach>
-                     <input type="file" multiple="multiple" class="form-control" id="picture" name="picture"
-                        placeholder="사용자 사진">
-                  </div>
-               </div>
-               <input type="hidden" name="postId" value="${post.postId }">
-               <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                     <input type="button" id="savebutton" value="수정완료" />
-                  </div>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
+							<input type="file" maxlength="5" multiple="multiple"
+								class="form-control" id="picture" name="picture">
+						</div>
+					</div>
+					<input type="hidden" name="postId" value="${post.postId }">
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="button" id="savebutton" value="수정완료" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

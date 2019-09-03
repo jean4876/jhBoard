@@ -28,6 +28,7 @@ public class EnterBoardController extends HttpServlet {
 	private IPostService postService;
 	private IBoardService boardService;
 
+
 	private static final Logger logger = LoggerFactory.getLogger(EnterBoardController.class);
 
 	@Override
@@ -58,9 +59,11 @@ public class EnterBoardController extends HttpServlet {
         paramter.put("pagesize", pagesize);
         paramter.put("boardId", boardId);
 
-
         List<Post> postList = postService.getPostPagingList(paramter);
-        int paginationSize = (int)Math.ceil((double)postList.size() / pagesize);
+        int totalCnt =  postService.getPostTotalCnt(boardId);
+
+
+        int paginationSize = (int)Math.ceil((double)totalCnt / pagesize);
 
       request.setAttribute("postList", postList);
       request.setAttribute("paginationSize", paginationSize);

@@ -28,6 +28,7 @@
 			$('#postId').val(dataValue);
 			$('#frm').submit();
 		});
+		$
 	})
 </script>
 </head>
@@ -59,27 +60,36 @@
 									<th>작성일시</th>
 								</tr>
 
-								<c:forEach items="${postList}" var="post">
-									<c:choose>
-										<c:when test = "${post.postUse  == '미사용'}">
-											<tr>
-												<td>${post.postId}</td>
-												<td>삭제된 게시글 입니다.</td>
-												<td>${post.userId}</td>
-												<td>${post.postReg_dt}</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<tr class="postTr" data-postId="${post.postId}">
-												<td>${post.postId}</td>
-												<td>${post.postTitle}</td>
-												<td>${post.userId}</td>
-												<td>${post.postReg_dt}</td>
-											</tr>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-
+                        <c:forEach items="${postList}" var="post">
+                              <c:choose>
+                                 <c:when test="${post.postUse == '미사용' }">
+                           <tr data-postId="${post.postId}">
+                              <td>${post.postId}<input type="hidden" value="${post.postId}"/></td>
+                                    <td>
+                                    <c:forEach begin="0" end="${(post.level-1)*2 }">
+                                    </c:forEach>
+                                    <c:if test="${post.parentPost != 0 }">
+                                    	<span class="glyphicon glyphicon-arrow-right"></span>
+                                    </c:if>
+                                    &nbsp;&nbsp;&nbsp;삭제된 게시글입니다.</td>
+                                 </c:when>
+                                 <c:otherwise>
+                                 <tr class="postTr" data-postId="${post.postId}">
+                              <td>${post.postId}<input type="hidden" value="${post.postId}"/></td>
+                                    <td>
+                                    <c:forEach begin="0" end="${(post.level-1)*2 }">
+                                       &nbsp;&nbsp;
+                                    </c:forEach>
+                                    <c:if test="${post.parentPost != 0 }">
+                                    	<span class="glyphicon glyphicon-arrow-right"></span>
+                                    </c:if>
+                                    ${post.postTitle}</td>
+                                 </c:otherwise>
+                              </c:choose>
+                              <td>${post.userId}</td>
+                              <td>${post.postReg_dt}</td>
+                           </tr>
+                        </c:forEach>
 							</table>
 						</div>
 
@@ -90,45 +100,84 @@
 								<%-- 이전 페이지 가기 : 지금 있는 페이지에서 한페이지 전으로
                              단 1페이지인 경우는 li 태그에 class="disabled"를 추가하고 이동 경로는 차단
                          --%>
-								<c:choose>
-									<c:when test="${pageVo.page == 1 }">
-										<li class="disabled"><a href="#" aria-label="Previous">
-												<span aria-hidden="true">&laquo;</span>
-										</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a
-											href="${cp }/enterBoard?page=${pageVo.page-1 }&pagesize=10"
-											aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-										</a></li>
-									</c:otherwise>
-								</c:choose>
+                        <c:choose>
+                           <c:when test="${page == 1 }">
+                              <li class="disabled">
+                                 <a href="#" aria-label="Previous">
+                                   <span aria-hidden="true">&laquo;</span>
+                                 </a>
+                               </li>
+                           </c:when>
+                           <c:otherwise>
+                              <li>
+                                   <a href="${cp }/enterBoard?page=1&boardId=${board.boardId}" aria-label="Previous">
+                                   <span aria-hidden="true">&laquo;</span>
+                                 </a>
+                               </li>
+                           </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                           <c:when test="${page == 1 }">
+                              <li class="disabled">
+                                 <a href="#" aria-label="Previous">
+                                   <span aria-hidden="true">&laquo;</span>
+                                 </a>
+                               </li>
+                           </c:when>
+                           <c:otherwise>
+                              <li>
+                                   <a href="${cp }/enterBoard?page=${page-1 }&boardId=${board.boardId}" aria-label="Previous">
+                                   <span aria-hidden="true">&laquo;</span>
+                                 </a>
+                               </li>
+                           </c:otherwise>
+                        </c:choose>
 
-								<c:forEach begin="1" end="${paginationSize}" var="page">
-									<%-- 방법1 --%>
-									<c:choose>
-										<c:when test="${page == pageVo.page}">
-											<li class="active"><span>${page }</span></li>
-										</c:when>
-										<c:otherwise>
-											<li><a
-												href="${cp }/enterBoard?page=${page }&pagesize=10">${page }</a></li>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<c:choose>
-									<c:when test="${pageVo.page == paginationSize }">
-										<li class="disabled"><a href="#" aria-label="Next"> <span
-												aria-hidden="true">&raquo;</span>
-										</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a
-											href="${cp }/enterBoard?page=${pageVo.page+1 }&pagesize=10"
-											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										</a></li>
-									</c:otherwise>
-								</c:choose>
+                        <c:forEach begin="1" end="${paginationSize}" var="pageSize">
+                           <%-- 방법1 --%>
+                           <c:choose>
+                              <c:when test="${pageSize == page}">
+                                 <li   class="active"><span>${pageSize }</span></li>
+                              </c:when>
+                              <c:otherwise>
+                                 <li><a href="${cp }/enterBoard?page=${pageSize }&boardId=${board.boardId}">${pageSize }</a></li>
+                              </c:otherwise>
+                           </c:choose>
+
+                        </c:forEach>
+
+                        <c:choose>
+                           <c:when test="${page == paginationSize }">
+                               <li class="disabled">
+                                 <a href="#" aria-label="Next">
+                                   <span aria-hidden="true">&raquo;</span>
+                                 </a>
+                               </li>
+                           </c:when>
+                           <c:otherwise>
+                              <li>
+                                    <a href="${cp }/enterBoard?page=${page+1 }&boardId=${board.boardId}" aria-label="Next">
+                                   <span aria-hidden="true">&raquo;</span>
+                                 </a>
+                               </li>
+                           </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                           <c:when test="${page == paginationSize }">
+                               <li class="disabled">
+                                 <a href="#" aria-label="Next">
+                                   <span aria-hidden="true">&raquo;</span>
+                                 </a>
+                               </li>
+                           </c:when>
+                           <c:otherwise>
+                              <li>
+                                    <a href="${cp }/enterBoard?page=${paginationSize }&boardId=${board.boardId}" aria-label="Next">
+                                   <span aria-hidden="true">&raquo;</span>
+                                 </a>
+                               </li>
+                           </c:otherwise>
+                        </c:choose>
 							</ul>
 						</div>
 					</div>

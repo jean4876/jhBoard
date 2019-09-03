@@ -45,7 +45,7 @@ public interface IBoardService {
 	 * @return
 	 * Method 설명 : 게시판의 사용여부를 바꾼다.
 	 */
-	int updateBoard(Map<String, String> map);
+	int updateBoard(Map<String, Object> map);
 
 	/**
 	 *
