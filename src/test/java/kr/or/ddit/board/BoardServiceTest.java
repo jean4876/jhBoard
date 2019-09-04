@@ -48,7 +48,7 @@ public class BoardServiceTest {
 		List<Board> list = boardService.getAllBoard();
 
 		/***Then***/
-		assertEquals(10, list.size());
+		assertEquals(11, list.size());
 	}
 
 	@Test

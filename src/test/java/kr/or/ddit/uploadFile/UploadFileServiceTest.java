@@ -12,8 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.board.model.UploadFile;
-import kr.or.ddit.board.repository.uploadFile.IUploadFileDao;
-import kr.or.ddit.board.repository.uploadFile.UploadFileDaoImpl;
 import kr.or.ddit.board.service.uploadFile.IUploadFileService;
 import kr.or.ddit.board.service.uploadFile.UploadFileServiceImpl;
 import kr.or.ddit.util.MybatisUtil;
@@ -87,7 +85,7 @@ public class UploadFileServiceTest {
    public void getPostUploadFile() {
 
 		/***Given***/
-		int uploadId = 56;
+		int uploadId = 37;
 
 
 		/***When***/
@@ -95,7 +93,7 @@ public class UploadFileServiceTest {
 
 
 		/***Then***/
-		assertEquals(56, file.getUploadId());
+		assertEquals(37, file.getUploadId());
 
    }
 

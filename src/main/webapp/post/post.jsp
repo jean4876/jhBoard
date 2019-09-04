@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -55,9 +56,11 @@
 						<input type="hidden" name="boardId" value="${post.boardId }">
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<a href="${cp }/modifyPost?postId=${post.postId}" class="btn btn-default">글 수정</a>
-								<a href="${cp }/deletePost?postId=${post.postId}" class="btn btn-default">글 삭제</a>
-								<a href="${cp }/replyPost?postId=${post.postId}" class="btn btn-default">답글 쓰기</a>
+								<c:if test="${post.userId == S_USERVO.userId }">
+									<a href="${cp }/modifyPost?postId=${post.postId}" class="btn btn-default">글 수정</a>
+									<a href="${cp }/deletePost?postId=${post.postId}" class="btn btn-default">글 삭제</a>
+								</c:if>
+									<a href="${cp }/replyPost?postId=${post.postId}" class="btn btn-default">답글 쓰기</a>
 							</div>
 						</div>
 				</form>

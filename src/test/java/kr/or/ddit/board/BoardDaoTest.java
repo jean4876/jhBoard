@@ -65,7 +65,7 @@ public class BoardDaoTest {
 		List<Board> list = boardDao.getAllBoard(sqlSession);
 
 		/***Then***/
-		assertEquals(10, list.size());
+		assertEquals(11, list.size());
 	}
 
 	@Test

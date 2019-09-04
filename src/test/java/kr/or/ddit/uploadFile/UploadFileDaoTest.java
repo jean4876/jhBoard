@@ -85,7 +85,7 @@ public class UploadFileDaoTest {
    public void getPostUploadFile() {
 
 		/***Given***/
-		int uploadId = 56;
+		int uploadId = 37;
 
 
 		/***When***/
@@ -93,7 +93,7 @@ public class UploadFileDaoTest {
 
 
 		/***Then***/
-		assertEquals(56, file.getUploadId());
+		assertEquals(37, file.getUploadId());
 
    }
 

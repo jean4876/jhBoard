@@ -51,7 +51,12 @@ $(document).ready(function(){
 
 		var fileInput = document.getElementById("picture");
 		var files = fileInput.files;
-		if(files.length > 5){
+		var uploadedFile = $(".deleteFile").length;
+
+
+
+
+		if((files.length +uploadedFile) > 5){
 			alert("파일은 5개까지 올릴수 있습니다.");
 			$('#picture').val("");
 		}
